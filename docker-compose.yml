@@ -18,21 +18,22 @@ services:
     volumes:
       - "/mnt/nfs-1/superset:/etc/superset"
       - "/mnt/nfs-1/superset/superset_config.py:/etc/superset/superset_config.py"
-      - "/mnt/nfs-1/superset/requirements.txt:/etc/superset/requirements.txt"
+#      - "/mnt/nfs-1/superset/requirements.txt:/etc/superset/requirements.txt"
       - "/mnt/nfs-1/superset/superset-init.sh:/etc/superset/superset-init.sh"
     ports:
       - "8088:8088"
     restart: always
     working_dir: "/etc/superset"
-    command: pip3 install -r requirements.txt
+#    command: pip3 install -r requirements.txt
     environment:
       -  ADMIN_PWD=iloveyousuperset
 #      -  SUP_META_DB_URI=mysql+mysqldb://db_user:db_pwd@chinnus-mysql/superset
 #      -  SUP_META_DB_URI=mysql+mysqldb://db_user:db_pwd@192.168.0.111:3306/superset
-      -  SQLALCHEMY_DATABASE_URI = mysql://db_user:db_pwd@192.168.0.111:3306/supersetcharset=utf8mb4
+      -  SQLALCHEMY_DATABASE_URI = mysql://db_user:db_pwd@192.168.0.111:3306/superset
       -  SUPERSET_PASSWORD=iloveyousuperset
+      -  SECRET_KEY=iloveyounisha
 #      -  MAPBOX_API_KEY: ${MAPBOX_API_KEY}
-    entrypoint:
-      - superset-init
+#    entrypoint:
+#      - ["bash","superset-init.sh"]
     external_links:
         -  chinnus-mysql
