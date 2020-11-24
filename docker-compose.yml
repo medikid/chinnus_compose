@@ -1,0 +1,31 @@
+version: '2'
+services:
+  minio:
+    image: minio/minio
+    volumes:
+      -  "/mnt/nfs-1/minio:/data"
+    ports:
+      -  "9003:9000"
+    environment:
+      -  MINIO_ACCESS_KEY=iloveyouminio
+      -  MINIO_SECRET_KEY=iloveyounisha
+    restart:  always
+    command:  server /data
+
+  superset:
+    container_name: "chinnus_superset"
+    image: tylerfowler/superset
+    volumes:
+      - "/mnt/nfs-1/superset:/superset"
+      - "/requirements.txt:/requirements.txt"
+    ports:
+      - "8088:8088"
+    restart: always
+    command: pip install -r requirements.txt
+    environment:
+      -  ADMIN_PWD=iloveyousuperset
+#      -  SUP_META_DB_URI=mysql+mysqldb://db_user:db_pwd@chinnus-mysql/superset
+      -  SUP_META_DB_URI=mysql+mysqldb://db_user:db_pwd@192.168.0.111:3306/superset
+      -  SUPERSET_PASSWORD=iloveyousuperset
+    external_links:
+        -  chinnus-mysql
