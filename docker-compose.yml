@@ -26,16 +26,16 @@ services:
     working_dir: "/etc/superset"
 #    command: pip3 install -r requirements.txt
     environment:
-# Uncomment to setup Full admin role name
+      - APP_NAME = "Superset"
+      - APP_ICON = "/static/assets/images/superset-logo-horiz.png"
+      - APP_ICON_WIDTH = 126
+      - LOGO_TARGET_PATH = None
+      - FAB_API_SWAGGER_UI = True
+
+      - AUTH_TYPE = AUTH_DB
       - AUTH_ROLE_ADMIN = 'Admin'
-
-# Uncomment to setup Public role name, no authentication needed
       - AUTH_ROLE_PUBLIC = 'Public'
-
-# Will allow user self registration
       - AUTH_USER_REGISTRATION = True
-
-# The default user self registration role
       - AUTH_USER_REGISTRATION_ROLE = "Public"
 
       -  ADMIN_PWD=iloveyousuperset
