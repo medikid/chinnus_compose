@@ -20,7 +20,8 @@ services:
     ports:
       - "8088:8088"
     restart: always
-    command: pip install -r ./superset/requirements.txt
+    working_dir: /superset
+    command: pip3 install -r requirements.txt
     environment:
       -  ADMIN_PWD=iloveyousuperset
 #      -  SUP_META_DB_URI=mysql+mysqldb://db_user:db_pwd@chinnus-mysql/superset
