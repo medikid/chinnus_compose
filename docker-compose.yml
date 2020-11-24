@@ -26,6 +26,18 @@ services:
     working_dir: "/etc/superset"
 #    command: pip3 install -r requirements.txt
     environment:
+# Uncomment to setup Full admin role name
+      - AUTH_ROLE_ADMIN = 'Admin'
+
+# Uncomment to setup Public role name, no authentication needed
+      - AUTH_ROLE_PUBLIC = 'Public'
+
+# Will allow user self registration
+      - AUTH_USER_REGISTRATION = True
+
+# The default user self registration role
+      - AUTH_USER_REGISTRATION_ROLE = "Public"
+
       -  ADMIN_PWD=iloveyousuperset
 #      -  SUP_META_DB_URI=mysql+mysqldb://db_user:db_pwd@chinnus-mysql/superset
 #      -  SUP_META_DB_URI=mysql+mysqldb://db_user:db_pwd@192.168.0.111:3306/superset
