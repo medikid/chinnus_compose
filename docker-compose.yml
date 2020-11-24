@@ -14,19 +14,21 @@ services:
 
   superset:
     container_name: "chinnus_superset"
-    image: tylerfowler/superset
+    image: amancevice/superset
     volumes:
-      - "/mnt/nfs-1/superset:/superset"
+      - "/mnt/nfs-1/superset:/home/superset"
     ports:
       - "8088:8088"
     restart: always
-    working_dir: "/superset"
+    working_dir: "/home/superset"
     command: pip3 install -r requirements.txt
     environment:
       -  ADMIN_PWD=iloveyousuperset
 #      -  SUP_META_DB_URI=mysql+mysqldb://db_user:db_pwd@chinnus-mysql/superset
 #      -  SUP_META_DB_URI=mysql+mysqldb://db_user:db_pwd@192.168.0.111:3306/superset
-      -  SUP_META_DB_URI=mysql://db_user:db_pwd@192.168.0.111:3306/superset
+      -  SQLALCHEMY_DATABASE_URI = mysql://db_user:db_pwd@192.168.0.111:3306/supersetcharset=utf8mb4
       -  SUPERSET_PASSWORD=iloveyousuperset
+    entrypoint:
+      - superset-init
     external_links:
         -  chinnus-mysql
