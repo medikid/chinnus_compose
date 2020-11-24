@@ -25,7 +25,8 @@ services:
     environment:
       -  ADMIN_PWD=iloveyousuperset
 #      -  SUP_META_DB_URI=mysql+mysqldb://db_user:db_pwd@chinnus-mysql/superset
-      -  SUP_META_DB_URI=mysql+mysqldb://db_user:db_pwd@192.168.0.111:3306/superset
+#      -  SUP_META_DB_URI=mysql+mysqldb://db_user:db_pwd@192.168.0.111:3306/superset
+      -  SUP_META_DB_URI=mysql://db_user:db_pwd@192.168.0.111:3306/superset
       -  SUPERSET_PASSWORD=iloveyousuperset
     external_links:
         -  chinnus-mysql
